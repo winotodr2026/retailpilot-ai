@@ -14,12 +14,13 @@ Sprint 6 — Lock It Down   [Day 7+, before real users]
 
 ## Sprint 1 — Database & Master Data
 **Goal:** Schema live in Supabase, seed data queryable.
-- [ ] Run migration SQL (all tables + RLS v1 policies + seed rows)
-- [ ] Confirm 4 outlets, 4 SPGs, 2 supervisors, 3 daily_reports, 3 ai_analyses visible in Supabase Studio
+- [ ] Run migration SQL (all tables + RLS v1 policies + seed rows) — `0001_init.sql`
+- [ ] Run foundation migration `0002_company_dedup_indexes_ai_status.sql` (companies table + company_id links + duplicate-report constraint + indexes + ai_analyses status/retry)
+- [ ] Confirm 1 company (Pring Mas), 4 outlets, 4 SPGs, 2 supervisors, 3 daily_reports, 3 ai_analyses (status = `completed`) visible in Supabase Studio
 - [ ] Verify select queries return rows via Supabase JS client
 - [ ] `shelf_photos` Storage bucket created
 
-**Done when:** `select * from daily_reports` returns 3 seeded rows with joined ai_analyses data.
+**Done when:** `select * from daily_reports` returns 3 seeded rows with joined ai_analyses data, each report linked to its company, and a duplicate (same spg_id + outlet_id + report_date) insert is rejected.
 
 ---
 

@@ -6,9 +6,9 @@
 - `SUPABASE_ANON_KEY` is public by design — safe because RLS controls data access.
 
 ## Permission Model (v1 — open demo)
-- All tables: permissive RLS (select + write open) so anonymous visitors can demo the app.
+- All tables, including `companies`: permissive RLS (select + write open) so anonymous visitors can demo the app.
 - No PII in seed data beyond demo names.
-- Lock-down sprint replaces policies with `auth.uid() = user_id` + role enum (`spg | supervisor | manager | ceo`).
+- Lock-down sprint replaces policies with `auth.uid() = user_id` + role enum (`spg | supervisor | manager | ceo`), and can add `company_id` scoping once more than one company exists.
 
 ## Approved Tools Rule
 The `analyze-report` Edge Function may only call: OpenAI Chat Completions API and Supabase DB insert. It cannot execute arbitrary shell commands, send emails, or call external webhooks. Any new tool must be explicitly added and code-reviewed.

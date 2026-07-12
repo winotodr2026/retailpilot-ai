@@ -21,6 +21,8 @@
 - Navigate to `/report/[fake-uuid]` → 404 / "Report not found" message, not a blank screen.
 - Open `/supervisor` with no reports submitted today → "No reports submitted today" empty state shown.
 - Open `/` with all reports from yesterday only → KPI cards show yesterday's totals with date label, not zeros with no label.
+- Submit a second report for the same SPG, same outlet, same date → rejected by the database's unique constraint; UI shows a clear "already submitted today" error, no duplicate row created.
+- An `ai_analyses` row stuck at `status = 'failed'` → retry action (calling `retry_ai_analysis`) sets it back to `pending`, increments `retry_count`, and clears `last_error`, so it can be reprocessed.
 
 ## Deployment Check
 - Open live Vercel URL on a real Android phone → `/report/new` form is fully usable without horizontal scroll.
