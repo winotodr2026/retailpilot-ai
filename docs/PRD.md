@@ -1,8 +1,30 @@
-Problem: An AI-powered National Sales Promotion Copilot that automates daily SPG reporting, KPI tracking, competitor monitoring, outlet execution, and supervisor coaching for Pring Mas across all modern trade stores.A standout portfolio project that proves I can ship a real, working app with AI.
-For: • Sales Promotion Girls (SPGs) • Sales Supervisors • Merchandisers • National Sales Manager • CEO
-Core things to track: Outlets  SPGs  Sales Supervisors  Sampling Events  Daily Traffic  Greeting Count  Customer Stops  Tester Distribution  Conversion Rate  Transactions  SKU Sold  Sales Revenue  Basket Size  Display Compliance  Shelf Photos  Competitor Activities  Promotions  Stock Availability  Out-of-Stock Cases  Customer Feedback  Customer Complaints  Store Visits  Coaching Notes  Action Plans  Daily Reports  Weekly Reports  Monthly Reports  AI Recommendations
-The one workflow (must work v1): An SPG completes her daily sampling activity, uploads photos and sales numbers, and the AI automatically generates KPI analysis, identifies problems, recommends actions, and sends a supervisor-ready report.A visitor opens the live app and sees it working end-to-end.
-Success in a week: • Live mobile app deployed • SPG submits one real daily report • AI generates outlet performance analysis • Dashboard updates automatically • Supervisor receives recommended actions • CEO can monitor national performance from one dashboardI have a deployed app + a short case study I can show employers.
-Not v1: Payroll  HR Recruitment  ERP Integration  Accounting  Purchase Orders  Inventory Management  Distributor Management  Loyalty Program  WhatsApp Automation  Forecasting Engine  Demand Planning  Machine Learning Sales Prediction  ERP Sync  Accurate Online Integration  Power BI Integration
+# RetailPilot AI — Product Requirements
 
-Build focus: Optimize for a polished, demoable portfolio piece a recruiter can try in 30 seconds — first impression and clarity matter.
+## Problem
+SPGs at Pring Mas modern trade outlets submit daily activity reports manually. There is no automated KPI analysis, no instant problem detection, and supervisors receive no structured recommended actions. The National Sales Manager and CEO have no real-time national view.
+
+## Target Users
+| Role | Primary need |
+|---|---|
+| SPG | Fast mobile report submission, instant AI feedback |
+| Sales Supervisor | Outlet performance digest, coaching prompts |
+| National Sales Manager / CEO | Single-screen national KPI view, top AI-flagged problems |
+
+## Core Objects
+`outlets` · `spgs` · `supervisors` · `daily_reports` · `ai_analyses` · `coaching_notes` · `competitor_activities` · `audit_logs`
+
+## MVP Must-Haves (v1)
+- [ ] SPG submits daily report (traffic, greetings, stops, testers, transactions, SKU, revenue, display compliance, stock, photos, competitor notes)
+- [ ] AI instantly returns KPI summary, problem flags, and ranked recommended actions
+- [ ] `/report/[id]` shows full report + AI analysis card
+- [ ] Supervisor dashboard lists all outlet reports with AI recommendations and coaching note entry
+- [ ] CEO homepage shows national KPI cards + outlet performance table — no login required
+- [ ] App deployed and publicly accessible
+
+## Non-Goals (v1)
+Payroll · HR · ERP integration · WhatsApp automation · Forecasting / ML · Power BI · Distributor management · Loyalty program · Per-user auth (Sprint 6)
+
+## Definition of Done
+**Pass:** An anonymous visitor opens the live URL, sees real aggregate KPI cards from seeded data, navigates to `/report/new`, submits a complete daily report, is redirected to `/report/[id]` where AI-generated KPI summary, at least one problem flag, and at least one recommended action are visible — all persisted in the database and confirmed by a Supabase Studio row check.
+
+**Fail:** Any step shows a blank screen, a dead button, a spinner that never resolves, or data visible only from seeds without the ability to create/edit/delete.
