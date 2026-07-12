@@ -25,3 +25,6 @@ All report data is stored in `daily_reports` regardless of AI success. Rule-base
 
 ## Company Scope
 Every `outlet`, `spg`, `supervisor`, and `daily_report` belongs to a `company` (seeded: **Pring Mas**). v1 still runs as a single company end-to-end; the column exists so multi-company support doesn't require a schema migration later.
+
+## Master Data Access
+`lib/master-data/queries.ts` holds read-only helpers (`getCompanies`, `getOutlets`, `getSupervisors`, `getSpgs`) for fetching reference/master data through the Supabase JS client. These are plain data-access functions — no UI is built on top of them yet; Sprint 2+ wires them into the report form and dashboards.

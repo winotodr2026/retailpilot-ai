@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "verify:sprint1": "node --env-file=.env.local scripts/verify-sprint1.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.5.0",
