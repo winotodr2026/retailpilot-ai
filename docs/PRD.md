@@ -11,11 +11,13 @@ SPGs at Pring Mas modern trade outlets submit daily activity reports manually. T
 | National Sales Manager / CEO | Single-screen national KPI view, top AI-flagged problems |
 
 ## Core Objects
-`outlets` · `spgs` · `supervisors` · `daily_reports` · `ai_analyses` · `coaching_notes` · `competitor_activities` · `audit_logs`
+`companies` · `outlets` · `spgs` · `supervisors` · `daily_reports` · `ai_analyses` · `coaching_notes` · `competitor_activities` · `audit_logs`
+
+All outlets, SPGs, supervisors, and daily reports belong to a `company` (seeded with one: **Pring Mas**). This makes the schema ready to support additional client companies later without a data-model rework.
 
 ## MVP Must-Haves (v1)
-- [ ] SPG submits daily report (traffic, greetings, stops, testers, transactions, SKU, revenue, display compliance, stock, photos, competitor notes)
-- [ ] AI instantly returns KPI summary, problem flags, and ranked recommended actions
+- [ ] SPG submits daily report (traffic, greetings, stops, testers, transactions, SKU, revenue, display compliance, stock, photos, competitor notes) — one report per SPG/outlet/day, duplicates rejected
+- [ ] AI instantly returns KPI summary, problem flags, and ranked recommended actions; a failed AI run can be retried instead of being lost
 - [ ] `/report/[id]` shows full report + AI analysis card
 - [ ] Supervisor dashboard lists all outlet reports with AI recommendations and coaching note entry
 - [ ] CEO homepage shows national KPI cards + outlet performance table — no login required

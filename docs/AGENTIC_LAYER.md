@@ -8,6 +8,7 @@
 - `flag_problems` — parse competitor notes + compliance booleans into structured flags
 - `draft_recommended_actions` — rank and draft action items from flags
 - `tag_competitor_activity` — extract brand + activity_type from free text
+- `retry_ai_analysis` — requeue a `failed` ai_analyses row back to `pending` (calls the `retry_ai_analysis` DB function; safe to auto-run since it only re-runs the same low-risk analysis job)
 
 ### Medium — Draft shown, 1-click approve
 - `draft_coaching_note` — pre-fill coaching_notes form from AI analysis (supervisor approves before save)
@@ -23,7 +24,7 @@
 - Any bulk data export
 
 ## Named Tools (v1)
-`analyze-report` (Supabase Edge Function) · `score-outlet` (server-side function) · `upload-photo` (Supabase Storage SDK)
+`analyze-report` (Supabase Edge Function) · `score-outlet` (server-side function) · `upload-photo` (Supabase Storage SDK) · `retry_ai_analysis` (Postgres function — resets a failed `ai_analyses` row to `pending`)
 
 ## Audit Log Fields
 `actor` · `action` · `object_type` · `object_id` · `detail` (jsonb) · `risk_level` · `created_at`

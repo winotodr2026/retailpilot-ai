@@ -14,12 +14,12 @@ Sprint 6 — Lock It Down   [Day 7+, before real users]
 
 ## Sprint 1 — Database & Master Data
 **Goal:** Schema live in Supabase, seed data queryable.
-- [ ] Run migration SQL (all tables + RLS v1 policies + seed rows)
-- [ ] Confirm 4 outlets, 4 SPGs, 2 supervisors, 3 daily_reports, 3 ai_analyses visible in Supabase Studio
-- [ ] Verify select queries return rows via Supabase JS client
-- [ ] `shelf_photos` Storage bucket created
+- [ ] Run migration SQL in order: `0001_init.sql` → `0002_company_dedup_indexes_ai_status.sql` (companies table + company_id links + duplicate-report constraint + indexes + ai_analyses status/retry) → `0003_storage_bucket.sql` (`shelf_photos` bucket + object policies)
+- [ ] Confirm 1 company (Pring Mas), 4 outlets, 4 SPGs, 2 supervisors, 3 daily_reports, 3 ai_analyses (status = `completed`) visible in Supabase Studio
+- [ ] Run `npm run verify:sprint1` (after `vercel link` + `vercel env pull .env.local`) — confirms row counts, company linkage, the daily_reports↔ai_analyses join, duplicate-report rejection, and that the `shelf_photos` bucket is readable, all via the Supabase JS client
+- [ ] Master-data read helpers available at `lib/master-data/queries.ts` (`getCompanies`, `getOutlets`, `getSupervisors`, `getSpgs`) for later sprints to build forms/dashboards on
 
-**Done when:** `select * from daily_reports` returns 3 seeded rows with joined ai_analyses data.
+**Done when:** `npm run verify:sprint1` reports all checks passing against the real Supabase project — 3 seeded `daily_reports` rows joined with `ai_analyses` data, every row linked to its company, a duplicate (same spg_id + outlet_id + report_date) insert rejected, and the `shelf_photos` bucket reachable.
 
 ---
 

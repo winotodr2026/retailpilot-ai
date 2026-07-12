@@ -27,9 +27,15 @@ Free-text competitor notes, customer feedback blobs, numeric counts, boolean com
 | No competitor threat | +10 pts |
 `outlet_score` = sum (0–100). Source = `rule-engine`, confidence = 1.0.
 
+## Analysis Status Lifecycle
+Each `ai_analyses` row moves through `pending` → `processing` → `completed` | `failed`. `retry_count`, `last_error`, and `last_attempted_at` track failures. A `failed` row can be requeued with the `retry_ai_analysis(daily_report_id)` database function, which resets it to `pending` and clears `last_error`.
+
 ## Events to Track
 - Report submitted
-- AI analysis returned (latency, confidence)
+- AI analysis started (status → processing)
+- AI analysis returned (latency, confidence, status → completed)
+- AI analysis failed (status → failed, error recorded)
+- AI analysis retried (status → pending, retry_count incremented)
 - Problem flag triggered
 - Supervisor reviewed
 - Coaching note added
