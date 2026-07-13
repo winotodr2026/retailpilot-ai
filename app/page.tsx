@@ -1,5 +1,7 @@
 import { Suspense } from "react";
+import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { requireCeo } from "@/lib/auth";
 import { getDashboardData } from "@/lib/dashboard/queries";
 import { AppShell } from "@/components/layout/app-shell";
 import { KpiCards } from "@/components/dashboard/kpi-cards";
@@ -14,6 +16,11 @@ import {
 } from "@/components/dashboard/dashboard-states";
 
 async function DashboardContent() {
+  const auth = await requireCeo();
+  if (!auth.ok) {
+    redirect(auth.redirect);
+  }
+
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
@@ -29,14 +36,14 @@ async function DashboardContent() {
 
     if (data.kpis.reportCount === 0) {
       return (
-        <AppShell companyName={data.companyName}>
+        <AppShell companyName={data.companyName} userEmail={auth.user.email} currentPath="/">
           <DashboardEmpty />
         </AppShell>
       );
     }
 
     return (
-      <AppShell companyName={data.companyName}>
+      <AppShell companyName={data.companyName} userEmail={auth.user.email} currentPath="/">
         <div className="space-y-6">
           {/* Hero banner */}
           <div className="relative overflow-hidden rounded-2xl border border-[var(--pm-green)]/20 bg-gradient-to-r from-[var(--pm-green-dark)] via-[var(--pm-green)] to-[var(--pm-green-light)] px-6 py-8 text-white shadow-lg sm:px-8">

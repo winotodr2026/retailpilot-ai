@@ -1,16 +1,27 @@
 import Link from "next/link";
+import { LogoutButton } from "@/components/auth/logout-button";
 
 const navItems = [
-  { href: "/", label: "Dashboard", active: true },
-  { href: "/report/new", label: "Submit Report", active: false, soon: true },
-  { href: "/supervisor", label: "Supervisor", active: false, soon: true },
+  { href: "/", label: "Dashboard" },
+  { href: "/account", label: "Account" },
+  { href: "/report/new", label: "Submit Report", soon: true },
+  { href: "/supervisor", label: "Supervisor", soon: true },
 ];
+
+function isNavActive(href: string, currentPath: string) {
+  if (href === "/") return currentPath === "/";
+  return currentPath === href || currentPath.startsWith(`${href}/`);
+}
 
 export function AppShell({
   companyName,
+  userEmail,
+  currentPath = "/",
   children,
 }: {
   companyName: string;
+  userEmail?: string | null;
+  currentPath?: string;
   children: React.ReactNode;
 }) {
   return (
@@ -46,7 +57,7 @@ export function AppShell({
                   key={item.href}
                   href={item.href}
                   className={
-                    item.active
+                    isNavActive(item.href, currentPath)
                       ? "rounded-lg bg-[var(--pm-green)] px-3 py-2 text-sm font-medium text-white shadow-sm"
                       : "rounded-lg px-3 py-2 text-sm text-[var(--pm-muted)] transition hover:bg-[var(--pm-green-muted)] hover:text-[var(--pm-text)]"
                   }
@@ -57,12 +68,7 @@ export function AppShell({
             )}
           </nav>
 
-          <div className="flex items-center gap-2">
-            <span className="hidden rounded-full border border-[var(--pm-gold)]/30 bg-[var(--pm-gold-muted)] px-3 py-1 text-xs font-medium text-[var(--pm-gold-dark)] sm:inline">
-              Live · Seed Data
-            </span>
-            <div className="h-2 w-2 animate-pulse rounded-full bg-emerald-400" title="Connected" />
-          </div>
+          <LogoutButton userEmail={userEmail} />
         </div>
       </header>
 

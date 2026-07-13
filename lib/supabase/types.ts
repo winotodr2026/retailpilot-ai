@@ -154,3 +154,12 @@ export type AuditLog = {
   risk_level: string;
   created_at: string;
 };
+
+export type UserRole = "ceo" | "supervisor" | "spg" | "manager";
+
+export type Profile = {
+  id: string;
+  role: UserRole;
+  full_name: string | null;
+  created_at: string;
+};
